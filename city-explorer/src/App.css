@@ -36,3 +36,41 @@
     transform: rotate(360deg);
   }
 }
+main{
+  text-align: center;
+  margin: 0;
+}
+
+
+form{
+  width: 60%px;
+  display: flex;
+  flex-direction:row;
+  justify-content: space-evenly;
+  /* border: solid blue; */
+  align-items: center;
+
+}
+
+img{
+  border: solid blue;
+  display: flex;
+  position: absolute;
+  right: 38%;
+}
+
+h2{
+  text-align: center;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+p{
+  margin-top: 10px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 20px;
+  text-align: center;
+}
+
+button:hover{
+
+
+}
