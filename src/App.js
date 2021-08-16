@@ -13,6 +13,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       cityInfo: {},
+      weatherInfo: [],
       findCity: '',
       show: false,
 
@@ -36,10 +37,18 @@ class App extends React.Component {
     let selectedCity = await axios.get(locUrl)
 
 
+
+    let LocUrl2 = ` ${process.env.REACT_APP_SERVER_LINK}/weather?&lat=latitude&lon=lontitude&searchQuery=${this.state.findCity}`
+
+    let selectedWether = await axios.get(LocUrl2)
+
+
+
     this.setState({
       cityInfo: selectedCity.data[0],
+      weatherInfo: selectedWether.data,
       show: true
-      
+
     })
 
 
@@ -63,13 +72,19 @@ class App extends React.Component {
 
 
         {this.state.show && <p>{this.state.findCity}<br></br>lat:{this.state.cityInfo.lat}<br></br>lon:{this.state.cityInfo.lon}</p>}
-        
-        
+
+
         {this.state.show &&
           <Image
             src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.cityInfo.lat},${this.state.cityInfo.lon}&zoom=14&size=400x400&markers=icon:large-red-cutout|${this.state.cityInfo.lat},${this.state.cityInfo.lon}|${this.state.cityInfo.lat},${this.state.cityInfo.lon}`} fluid />}
 
-      </div>
+
+
+{this.state.show && <p>{this.state.findCity}<br></br>lat:{this.state.cityInfo.lat}<br></br>lon:{this.state.cityInfo.lon}</p>}
+        <p>day {i}</p>
+
+
+      </div
     )
   }
 
