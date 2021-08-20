@@ -40,7 +40,7 @@ and Boshra as a TA
 
 ## Time Estimates
 
-
+lab 7
 Name of feature: React application that uses the Axios library to make user-initiated reqeusts for data from a thrid-party API.
 
 Estimate of time needed to complete: 4h
@@ -50,3 +50,19 @@ Start time: monday
 Finish time: tuseday
 
 Actual time needed to complete: 6 working hour
+
+
+lab 9
+Name of feature: 2. Refactor: Componentize the front-end codebase.
+
+Estimate of time needed to complete:
+
+1 hour
+
+Start time: 2:45 pm
+
+Finish time: 3:30 pm
+
+Actual time needed to complete:
+
+45 minutes
