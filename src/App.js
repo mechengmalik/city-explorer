@@ -7,7 +7,8 @@ import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import "./App.css";
 import Weather from './components/Weather';
-import Movie from './components/Movie';
+
+import Movies from './components/Movies';
 
 class App extends React.Component {
 
@@ -19,7 +20,7 @@ class App extends React.Component {
       lon: "",
       cityInfo: {},
       weatherInfo: [],
-      MovieInfo:[],
+      MovieInfo: [],
       show: false,
 
     }
@@ -62,26 +63,27 @@ class App extends React.Component {
     this.getMovie();
   }
 
-//___________________________________________________________________________________________________________________
+  //___________________________________________________________________________________________________________________
 
   getWeather = async () => {
-    
+
 
     // console.log(event.target.city.value)
 
-    
 
 
-    let LocUrl2 =`${process.env.REACT_APP_SERVER_LINK}/forecast?searchQuery=${this.state.findCity}`
+
+    let LocUrl2 = `${process.env.REACT_APP_SERVER_LINK}/forecast?searchQuery=${this.state.findCity}`
     try {
       let selectedWeather = await axios.get(LocUrl2)
-      
+      // console.log(selectedWeather)
+
       await this.setState({
 
         weatherInfo: selectedWeather.data
       })
-      console.log("eeeeeeeeeeee",this.state.weatherInfo)
-      
+      console.log("eeeeeeeeeeee", this.state.weatherInfo)
+
     } catch (error) {
       console.log(error.response)
 
@@ -90,26 +92,23 @@ class App extends React.Component {
     }
 
   }
-//____________________________________________________________________________________________________________________
+  //____________________________________________________________________________________________________________________
 
 
 
   getMovie = async () => {
-    
-
-    // console.log(event.target.city.value)
-     /* {console.log("ddddddd",this.state.weatherInfo)}; */  
 
 
-    let LocUrl3 =`${process.env.REACT_APP_SERVER_LINK}/movie?searchQuery=${this.state.findCity}`
+
+
+    let LocUrl3 = `${process.env.REACT_APP_SERVER_LINK}/movie?searchQuery=${this.state.findCity}`
     try {
       let selectedMovie = await axios.get(LocUrl3)
-      
+
       await this.setState({
 
         MovieInfo: selectedMovie.data
       })
-      // console.log(selectedWether)
 
     } catch (error) {
       console.log(error.response)
@@ -120,47 +119,60 @@ class App extends React.Component {
 
 
 
-render() {
-  return (
-    <div>
+  render() {
+    return (
+      <div>
 
 
-      <h2> City Explorer</h2>
+        <h2> City Explorer</h2>
 
 
-      <Form onSubmit={this.searchCity}>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>CITY NAME</Form.Label>
-          <Form.Control type="text" placeholder="insert the wanted city" name="city" />
-        </Form.Group>
-
-
-
-        <Button type='submit'>Find the City</Button>
-      </Form>
+        <Form onSubmit={this.searchCity}>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Label>CITY NAME</Form.Label>
+            <Form.Control type="text" placeholder="insert the wanted city" name="city" />
+          </Form.Group>
 
 
 
-      {this.state.show && <p>{this.state.findCity}<br></br>lat:{this.state.cityInfo.lat}<br></br>lon:{this.state.cityInfo.lon}</p>}
+          <Button type='submit'>Find the City</Button>
+        </Form>
+
+        {/* <div className="loc"> */}
 
 
-      {this.state.show &&
-        <Image
-          src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.cityInfo.lat},${this.state.cityInfo.lon}&zoom=14&size=400x400&markers=icon:large-red-cutout|${this.state.cityInfo.lat},${this.state.cityInfo.lon}|${this.state.cityInfo.lat},${this.state.cityInfo.lon}`} fluid />}
+          {this.state.show && <p>{this.state.findCity}<br></br>lat:{this.state.cityInfo.lat}<br></br>lon:{this.state.cityInfo.lon}</p>}
 
 
-      <Weather
-        show={this.state.show}
-        data={this.state.weatherInfo} />
-        {/* {console.log("ddddddd",this.state.weatherInfo)}; */}
+          {this.state.show &&
+            <Image
+              src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&center=${this.state.cityInfo.lat},${this.state.cityInfo.lon}&zoom=14&size=400x400&markers=icon:large-red-cutout|${this.state.cityInfo.lat},${this.state.cityInfo.lon}|${this.state.cityInfo.lat},${this.state.cityInfo.lon}`} fluid />}
 
-        <Movie
-        show = {this.state.show}
-        data = {this.state.MovieInfo}/>
+        {/* </div> */}
 
-    </div >
-   )
- };
+        {/* <div className="weather"> */}
+
+          <Weather
+            show={this.state.show}
+            data={this.state.weatherInfo} />
+
+        {/* </div> */}
+
+        {/* <div className="Movie"> */}
+
+          <Movies
+            show={this.state.show}
+            data={this.state.MovieInfo} />
+        {/* </div> */}
+
+
+
+
+
+
+      </div >
+    )
+  };
 }
 
 
